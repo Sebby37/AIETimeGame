@@ -1,14 +1,16 @@
 using UnityEngine;
 public struct MomentInTime
 {
-    public Transform position;
+    public Vector3 position;
     public Quaternion rotation;
-    public Rigidbody rb;
+    public Vector3 velocity;
+    public Vector3 angularVelocity;
 
-    public MomentInTime(Transform position, Quaternion rotation, Rigidbody rb)
+    public MomentInTime(Transform transform, Rigidbody rb)
     {
-        this.position = position;
-        this.rotation = rotation;
-        this.rb = rb;
+        this.position = transform.position;
+        this.rotation = transform.rotation;
+        this.velocity = rb.velocity;
+        this.angularVelocity = rb.angularVelocity;
     }
 }
