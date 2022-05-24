@@ -75,6 +75,7 @@ public class ReverseTimeComponent : MonoBehaviour
         }
         else
         {
+            // If there are no more moments in time, then the rewind is stopped
             rewinding = false;
         }
     }

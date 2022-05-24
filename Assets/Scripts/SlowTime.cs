@@ -8,10 +8,14 @@ public class SlowTime : MonoBehaviour
 
     [Range(0f, 1f)]
     public float slowSpeed = 0.25f;
+
+    public static float scale = 1;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // TODO: set the rigidbody motion of objects to use this version of scale instead
+        //*Time.deltaTime * SlowTime.scale;
     }
 
     // Update is called once per frame
@@ -25,7 +29,7 @@ public class SlowTime : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1.0f;
+                Time.timeScale = 1;
             }
             // Use Time.unscaledDeltaTime to move the player while timescale is 0
         }
