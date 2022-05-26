@@ -5,12 +5,13 @@ using UnityEngine;
 public class ReverseTimeComponent : MonoBehaviour
 {
     // Public variables
-    public bool rewinding = false;
+    public static bool rewinding = false;
     public int maxPointsInTime = 100;
     //public float timeBetweenRecord = 0.1f;
 
     // Private variables
     private Rigidbody rb;
+    private TimeBehaviour timeBehaviour;
     private List<MomentInTime> momentsInTime;
 
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class ReverseTimeComponent : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         momentsInTime = new List<MomentInTime>();
+        timeBehaviour = GetComponent<TimeBehaviour>();
     }
 
     private void FixedUpdate()
@@ -41,7 +43,11 @@ public class ReverseTimeComponent : MonoBehaviour
 
     void Record()
     {
-        // TODO: Add in a delay between recording
+        // Not recording when time is stopped
+        // TODO: Come back to this when I have a global system of checking whether time is stopped and it isn't object based
+        //Debug.Log($"{gameObject.name}: {timeBehaviour}");
+        //if (timeBehaviour.state == TimeBehaviour.TimeStates.Stopped) return;
+
         // Removing the earliest moment in time when the maximum moments in time have been reached
         if (momentsInTime.Count >= maxPointsInTime)
             momentsInTime.RemoveAt(momentsInTime.Count - 1);
