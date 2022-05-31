@@ -1697,14 +1697,12 @@ GameObject:
   - component: {fileID: 136877097569971178}
   - component: {fileID: 54063890235253982}
   - component: {fileID: 1773623761151486}
-  - component: {fileID: 1773623761151483}
-  - component: {fileID: 1773623761151485}
   - component: {fileID: 1773623761151482}
-  - component: {fileID: 1773623761151484}
-  - component: {fileID: 114963311488173156}
+  - component: {fileID: 1773623761151483}
   - component: {fileID: 114497868628246940}
   - component: {fileID: 114762041691299254}
   - component: {fileID: 1773623761151481}
+  - component: {fileID: 114963311488173156}
   m_Layer: 0
   m_Name: First Person Controller
   m_TagString: Untagged
@@ -1733,13 +1731,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773623761151480}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8ee571cae0d6d42979990259b53f95, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ac707e38c089084b83ba4c819a2ef0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSlowTime: 0
-  slowSpeed: 0.5
+  state: 0
+  affectedByStop: 0
+  affectedBySlowdown: 1
 --- !u!114 &1773623761151483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,33 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82c0f2ad91d8bc4bb8bb2757e0371e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPointsInTime: 100
---- !u!114 &1773623761151484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773623761151480}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5f4c62b006fff42ae33e5db78ea6dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1773623761151485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773623761151480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8ee571cae0d6d42979990259b53f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canSlowTime: 1
-  slowSpeed: 0.25
+  maxPointsInTime: 1000
 --- !u!114 &1773623761151486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3282,6 +3255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4250413541977861046, guid: 69f39c5e2efd0bf4a8ba69520b5f1fbd, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7263655151433959432, guid: 69f39c5e2efd0bf4a8ba69520b5f1fbd, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -6,7 +6,7 @@ public class ReverseTimeComponent : MonoBehaviour
 {
     // Public variables
     public static bool rewinding = false;
-    public int maxPointsInTime = 100;
+    public int maxPointsInTime = 1000;
     //public float timeBetweenRecord = 0.1f;
 
     // Private variables

@@ -35,9 +35,9 @@ public class PlayerTimeControl : MonoBehaviour
 
         // Same as above
         else if (Input.GetKeyDown(KeyCode.Q))
-            CallFunctionInObjects(TimeBehaviourFunctions.StopTime);
+            CallFunctionInObjects(TimeBehaviourFunctions.SlowTime);
         else if (Input.GetKeyUp(KeyCode.Q))
-            CallFunctionInObjects(TimeBehaviourFunctions.ResumeTime);
+            CallFunctionInObjects(TimeBehaviourFunctions.SpeedTime);
     }
 
     // Function to call a function in all TimeBehaviour scripts

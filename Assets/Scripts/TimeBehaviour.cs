@@ -7,11 +7,11 @@ public class TimeBehaviour : MonoBehaviour
     // Public variables
     public TimeStates state;
     public bool affectedByStop = true;
+    public float slowTimeScale = 0.5f;
     public bool affectedBySlowdown = true;
 
     // Private variables
     private Rigidbody rb;
-    private float slowTimeScale = 0.25f;
     private Vector3 previousVelocity;
     private Vector3 previousAngularVelocity;
 
@@ -44,15 +44,6 @@ public class TimeBehaviour : MonoBehaviour
         switch (state)
         {
             case TimeStates.Slow:
-                // Creating a temporary velocity vector to apply motion to
-                Vector3 currentVelocity = rb.velocity;
-
-                currentVelocity.x *= slowTimeScale;
-                currentVelocity.y *= slowTimeScale;
-                currentVelocity.z *= slowTimeScale;
-
-                rb.velocity = currentVelocity;
-                rb.angularVelocity *= slowTimeScale;
                 break;
             case TimeStates.Stopped:
                 rb.isKinematic = true;
@@ -67,24 +58,17 @@ public class TimeBehaviour : MonoBehaviour
         if (!affectedBySlowdown) return;
 
         state = TimeStates.Slow;
+        rb.drag = 5 / slowTimeScale;  // TODO: Scale downwards acceleration so you fall naturally
+        //Physics.gravity *= slowTimeScale;
     }
 
     public void SpeedTime()
     {
         if (!affectedBySlowdown) return;
 
-        // Performing the inverse of the velocity operations in the FixedUpdate function to revert the velocities back to a normal scale
-        Vector3 currentVelocity = rb.velocity;
-
-        // TODO: Fix this for physics object such as the box, where movement is halted significantly more than the player
-        currentVelocity.x /= slowTimeScale;
-        currentVelocity.y /= slowTimeScale;
-        currentVelocity.z /= slowTimeScale;
-
-        rb.velocity = currentVelocity;
-        rb.angularVelocity /= slowTimeScale;
-
         state = TimeStates.Normal;
+        rb.drag = 0;
+        //Physics.gravity /= slowTimeScale;
     }
 
     public void StopTime()
