@@ -44,6 +44,7 @@ public class TimeBehaviour : MonoBehaviour
         switch (state)
         {
             case TimeStates.Slow:
+                //rb.velocity = rb.velocity / (1 - Time.deltaTime * rb.drag);
                 break;
             case TimeStates.Stopped:
                 rb.isKinematic = true;
@@ -59,6 +60,7 @@ public class TimeBehaviour : MonoBehaviour
 
         state = TimeStates.Slow;
         rb.drag = 5 / slowTimeScale;  // TODO: Scale downwards acceleration so you fall naturally
+        rb.angularDrag = 5 / slowTimeScale;
         //Physics.gravity *= slowTimeScale;
     }
 
@@ -67,7 +69,10 @@ public class TimeBehaviour : MonoBehaviour
         if (!affectedBySlowdown) return;
 
         state = TimeStates.Normal;
+        rb.velocity = rb.velocity / (1 - Time.deltaTime * rb.drag);
+
         rb.drag = 0;
+        rb.angularDrag = 0.05f;
         //Physics.gravity /= slowTimeScale;
     }
 
