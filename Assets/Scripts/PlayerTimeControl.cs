@@ -18,10 +18,12 @@ public class PlayerTimeControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Populating the list of TimeBehaviours
-        foreach(Object obj in Resources.FindObjectsOfTypeAll(typeof(TimeBehaviour)))
-            if(obj != null)
-                timeBehaviours.Add(obj as TimeBehaviour);
+        RepopulateTimeBehaviourList();
+    }
+
+    private void FixedUpdate()
+    {
+        RepopulateTimeBehaviourList();
     }
 
     // Update is called once per frame
@@ -64,5 +66,15 @@ public class PlayerTimeControl : MonoBehaviour
                     break;
             }
         }
+    }
+
+    void RepopulateTimeBehaviourList()
+    {
+        timeBehaviours.Clear();
+
+        // Populating the list of TimeBehaviours
+        foreach (Object obj in Resources.FindObjectsOfTypeAll(typeof(TimeBehaviour)))
+            if (obj != null)
+                timeBehaviours.Add(obj as TimeBehaviour);
     }
 }

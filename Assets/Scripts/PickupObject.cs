@@ -8,6 +8,7 @@ public class PickupObject : MonoBehaviour
     public GameObject raycastPoint;
     public GameObject pickupParent;
 
+    [SerializeField]
     private GameObject heldObject;
 
     // Start is called before the first frame update
@@ -18,7 +19,12 @@ public class PickupObject : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        if (IsObjectHeld())
+        {
+            heldObject.transform.position = pickupParent.transform.position;
+            heldObject.transform.rotation = pickupParent.transform.rotation;
+            heldObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
@@ -39,6 +45,11 @@ public class PickupObject : MonoBehaviour
                     if (hit.collider.CompareTag("Pickup"))
                     {
                         heldObject = hit.collider.gameObject;
+                        Physics.IgnoreCollision(heldObject.GetComponent<Collider>(), GetComponent<Collider>(), true);
+                    }
+                    else if (hit.collider.CompareTag("Push Button"))
+                    {
+                        hit.collider.gameObject.GetComponent<Button>().Press();
                     }
                 }
                 else
@@ -47,12 +58,7 @@ public class PickupObject : MonoBehaviour
                 }
             }
         }
-        if (IsObjectHeld())
-        {
-            heldObject.transform.position = pickupParent.transform.position;
-            heldObject.transform.rotation = pickupParent.transform.rotation;
-            heldObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
+        
     }
 
     public bool IsObjectHeld()
@@ -62,14 +68,7 @@ public class PickupObject : MonoBehaviour
 
     public void DropHeldObject()
     {
+        Physics.IgnoreCollision(heldObject.GetComponent<Collider>(), GetComponent<Collider>(), false);
         heldObject = null;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject == heldObject)
-        {
-            Physics.IgnoreCollision(heldObject.GetComponent<Collider>(), GetComponent<Collider>());
-        }
     }
 }

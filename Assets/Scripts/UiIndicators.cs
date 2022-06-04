@@ -29,7 +29,7 @@ public class UiIndicators : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // TODO: Replace the simple keycode check with checking a boolean to make sure the player can actually perform these actions
         reverseTimeImage.sprite = ReverseTimeComponent.rewinding ? greenLed : redLed;

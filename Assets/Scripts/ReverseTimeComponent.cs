@@ -44,9 +44,8 @@ public class ReverseTimeComponent : MonoBehaviour
     void Record()
     {
         // Not recording when time is stopped
-        // TODO: Come back to this when I have a global system of checking whether time is stopped and it isn't object based
-        //Debug.Log($"{gameObject.name}: {timeBehaviour}");
-        //if (timeBehaviour.state == TimeBehaviour.TimeStates.Stopped) return;
+        // TODO: Come back to this when there is a global time stop state as this causes the player to come out of sync
+        //if (timeBehaviour != null && timeBehaviour.state == TimeBehaviour.TimeStates.Stopped) return;
 
         // Removing the earliest moment in time when the maximum moments in time have been reached
         if (momentsInTime.Count >= maxPointsInTime)
@@ -74,7 +73,7 @@ public class ReverseTimeComponent : MonoBehaviour
             rb.velocity = currentMoment.velocity;
             rb.angularVelocity = currentMoment.angularVelocity;
 
-            Debug.Log($"cur moment Velocity: {currentMoment.velocity}\nrigidbody Velocity: {rb.velocity}");
+            //Debug.Log($"cur moment Velocity: {currentMoment.velocity}\nrigidbody Velocity: {rb.velocity}");
 
             // Removing the latest moment in time as it is no longer being used
             momentsInTime.RemoveAt(0);
