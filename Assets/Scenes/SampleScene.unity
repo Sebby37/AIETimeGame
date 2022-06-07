@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -376,7 +376,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1300
+  m_Name: pb_Mesh-3608
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8142,7 +8142,7 @@ Animator:
   m_GameObject: {fileID: 981763665}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d79dcf8bdf83ca4fb15c686fa47a184, type: 2}
+  m_Controller: {fileID: 9100000, guid: 402d26cd609725147922674834669120, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8163,6 +8163,7 @@ GameObject:
   - component: {fileID: 1005269089}
   - component: {fileID: 1005269088}
   - component: {fileID: 1005269087}
+  - component: {fileID: 1005269090}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -8193,7 +8194,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1005269085}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -8247,6 +8248,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005269085}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1005269090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005269085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &1060249202
 GameObject:
   m_ObjectHideFlags: 0
@@ -8339,7 +8353,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4590
+  m_Name: pb_Mesh18188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8580,7 +8594,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1288
+  m_Name: pb_Mesh-3596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9480,6 +9494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912334008}
   - component: {fileID: 1912334009}
+  - component: {fileID: 1912334010}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -9516,12 +9531,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b85e077c35db7749bc5a82bb14ab782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorType: 0
+  animator: {fileID: 1912334010}
   leftDoor: {fileID: 981763665}
   rightDoor: {fileID: 777082048}
-  topDoor: {fileID: 0}
   buttonTriggers:
   - {fileID: 1162361012}
+--- !u!95 &1912334010
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912334007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 633a8d21a44bef244a38fe4b2302e45c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2076383606
 GameObject:
   m_ObjectHideFlags: 0
@@ -9786,7 +9819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca7c99d53c62a249b446ec5f26fe7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  pushForce: 7.5
   maxPushDistance: 3
   pushPoint: {fileID: 4490257995110832}
 --- !u!114 &1773623761151486
