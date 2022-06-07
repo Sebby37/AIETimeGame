@@ -67,6 +67,7 @@ public class TimeBehaviour : MonoBehaviour
     public void SpeedTime()
     {
         if (!affectedBySlowdown) return;
+        if (rb == null) rb = GetComponent<Rigidbody>();
 
         state = TimeStates.Normal;
         rb.velocity = rb.velocity / (1 - Time.deltaTime * rb.drag);
@@ -79,6 +80,7 @@ public class TimeBehaviour : MonoBehaviour
     public void StopTime()
     {
         if (!affectedByStop) return;
+        if (rb == null) rb = GetComponent<Rigidbody>();
 
         previousVelocity = rb.velocity;
         previousAngularVelocity = rb.angularVelocity;
