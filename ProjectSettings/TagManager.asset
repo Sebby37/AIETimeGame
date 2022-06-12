@@ -7,6 +7,7 @@ TagManager:
   - Pickup
   - Push Button
   - Weighted Button
+  - Light Bridge
   layers:
   - Default
   - TransparentFX

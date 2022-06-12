@@ -21,17 +21,25 @@ public class Door : MonoBehaviour
             if (!button.IsPressed())
                 allButtonsPressed = false;
 
+        // Setting the "Open" parameter of the animator to be whether all buttons are pressed
         animator.SetBool("Open", allButtonsPressed);
+
+        // Using a collider to make sure that players can't run through closing doors
+        GetComponent<Collider>().enabled = !allButtonsPressed;
     }
 
     public void OpenDoor()
     {
         animator.SetBool("Open", true);
+
+        GetComponent<Collider>().enabled = false;
     }
 
     public void CloseDoor()
     {
         animator.SetBool("Open", false);
+
+        GetComponent<Collider>().enabled = true;
     }
 
     public bool IsOpen()

@@ -31,7 +31,7 @@ public class Button : MonoBehaviour
     {
         if (pressed) return;
 
-        pressed = true;
+        pressed = !invertPress;
         Debug.Log($"Button pressed! ({gameObject.name})");
     }
 
@@ -39,7 +39,7 @@ public class Button : MonoBehaviour
     {
         if (!pressed) return;
 
-        pressed = false;
+        pressed = invertPress;
         Debug.Log($"Button un-pressed! ({gameObject.name})");
     }
 

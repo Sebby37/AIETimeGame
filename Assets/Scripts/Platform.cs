@@ -16,10 +16,6 @@ public class Platform : MonoBehaviour
     [Header("Trigger Parameters")]
     public List<Button> buttonTriggers = new List<Button>();
 
-    [Header("Temp stuff")]
-    public float upSpeed;
-    public float changeSpeed;
-
     public enum MovingStates
     {
         Stopped,
@@ -33,7 +29,6 @@ public class Platform : MonoBehaviour
 
     /*
     TODO:
-    - Use parenting to attach and detach the player to the platform when they are inside a trigger collider
     - Test the platform with weighted buttons
     */
 
@@ -49,13 +44,14 @@ public class Platform : MonoBehaviour
         // Creating a path of spheres showing the path of the platform
         CreatePlatformPath(3);
 
+        // Setting the movement state to stopped
         currentMovementState = MovingStates.Stopped;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //transform.position += Vector3.up * Mathf.Sin(Time.timeSinceLevelLoad * changeSpeed) * upSpeed;
+        // Checking if all buttons are pressed
         bool allButtonsPressed = true;
         foreach (Button button in buttonTriggers)
             if (!button.IsPressed())
@@ -67,13 +63,16 @@ public class Platform : MonoBehaviour
             switch (currentMovementState)
             {
                 case MovingStates.Stopped:
+                    // If all buttons are pressed, then the movement state is set to forward/backward depending on the current traversal point
                     currentMovementState = (currentPointIndex <= 0 ? MovingStates.Forward : MovingStates.Backward);
                     break;
                 case MovingStates.Forward:
+                    // If all buttons are pressed and the platform is moving forward it is reversed
                     currentMovementState = MovingStates.Backward;
                     currentPointIndex += 1;
                     break;
                 case MovingStates.Backward:
+                    // Inverse of above
                     currentMovementState = MovingStates.Forward;
                     currentPointIndex -= 1;
                     break;
@@ -91,6 +90,7 @@ public class Platform : MonoBehaviour
         switch (currentMovementState)
         {
             case MovingStates.Forward:
+                // If the platform is at the final movement point, it is stopped and snapped to that final point
                 if (currentPointIndex >= movementPoints.Count - 1)
                 {
                     currentMovementState = MovingStates.Stopped;
@@ -99,11 +99,14 @@ public class Platform : MonoBehaviour
                     break;
                 }
 
+                // Getting the movement point target and creating a movement vector towards that target
                 currentPointTarget = movementPoints[currentPointIndex];
                 movementVector = currentPointTarget.forward * movementSpeed * Time.deltaTime;
 
+                // Moving the platform towards that target using the caluclated vector above
                 platform.transform.Translate(movementVector);
 
+                // if the platform and the next movement point are close enough, the platform is snapped to that point and the next point is chosen
                 if (Vector3.Distance(platform.transform.position, movementPoints[currentPointIndex + 1].position) <= platformSnapDistance)
                 {
                     currentPointIndex += 1;
@@ -113,6 +116,7 @@ public class Platform : MonoBehaviour
                 break;
 
             case MovingStates.Backward:
+                // If the current movement point is the first, then it is stopped and snapped to that point
                 if (currentPointIndex <= 0)
                 {
                     currentMovementState = MovingStates.Stopped;
@@ -121,11 +125,14 @@ public class Platform : MonoBehaviour
                     break;
                 }
 
+                // Calculating the movement vector needed to move to the next movement point
                 currentPointTarget = movementPoints[currentPointIndex - 1];
                 movementVector = (-currentPointTarget.forward) * movementSpeed * Time.deltaTime;
 
+                // Moving the platform using the calculated vector above
                 platform.transform.Translate(movementVector);
-                Debug.Log($"{movementPoints[currentPointIndex - 1].gameObject.name} {platform.transform.position} {movementPoints[currentPointIndex - 1].position} {Vector3.Distance(platform.transform.position, movementPoints[currentPointIndex - 1].position)}");
+                
+                // if the platform and next movement point are close enough, the platform is snapped to that point and the next point is chosen
                 if (Vector3.Distance(platform.transform.position, movementPoints[currentPointIndex - 1].position) <= platformSnapDistance)
                 {
                     currentPointIndex -= 1;
@@ -173,10 +180,19 @@ public class Platform : MonoBehaviour
                 // Calculating where the current sphere should appear along the path and scaling it down
                 currentSphere.transform.position = currentPoint.position + (currentPoint.transform.forward * distanceBetweenSpherePoints * j);
                 currentSphere.transform.localScale = Vector3.one / 4;
-
-                // If there is a sphere close to the a point, it is destroyed
-                //if (Vector3.Distance(currentSphere.transform.position, currentPoint.position) < distanceBetweenSpherePoints) Destroy(currentSphere);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // When a rigidbody collides with the platform, then it is stuck to the platform
+        collision.gameObject.transform.SetParent(platform.transform);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // When a rigidbody leaves the platform's collider, it is removed from the platform as a child
+        collision.gameObject.transform.SetParent(null);
     }
 }
