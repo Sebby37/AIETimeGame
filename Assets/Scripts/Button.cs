@@ -13,7 +13,8 @@ public class Button : MonoBehaviour
     {
         Pressable,
         Weighted,
-        CubeOnly
+        CubeOnly,
+        PlayerTrigger
     }
 
     void Start()
@@ -41,6 +42,9 @@ public class Button : MonoBehaviour
 
         pressed = invertPress;
         Debug.Log($"Button un-pressed! ({gameObject.name})");
+
+        if (buttonType == ButtonTypes.PlayerTrigger)
+            GetComponent<Collider>().enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,6 +60,12 @@ public class Button : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         HandlePressCollision(collision, false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            Press();
     }
 
     // Function to handle collisions and pressing on a weighted/cube button 

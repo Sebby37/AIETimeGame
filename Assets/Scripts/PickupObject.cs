@@ -8,7 +8,6 @@ public class PickupObject : MonoBehaviour
     public GameObject raycastPoint;
     public GameObject pickupParent;
 
-    [SerializeField]
     private GameObject heldObject;
 
     // Start is called before the first frame update

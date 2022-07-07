@@ -25,7 +25,7 @@ public class ReverseTimeComponent : MonoBehaviour
     private void FixedUpdate()
     {
         // Applying physics based on whether the object is rewinding
-        rb.isKinematic = rewinding;
+        //rb.isKinematic = rewinding;
 
         // Rewinding the object or recording it's position based on whether the object is rewinding
         if (rewinding)
@@ -43,10 +43,6 @@ public class ReverseTimeComponent : MonoBehaviour
 
     void Record()
     {
-        // Not recording when time is stopped
-        // TODO: Come back to this when there is a global time stop state as this causes the player to come out of sync
-        //if (timeBehaviour != null && timeBehaviour.state == TimeBehaviour.TimeStates.Stopped) return;
-
         // Removing the earliest moment in time when the maximum moments in time have been reached
         if (momentsInTime.Count >= maxPointsInTime)
             momentsInTime.RemoveAt(momentsInTime.Count - 1);
@@ -67,7 +63,7 @@ public class ReverseTimeComponent : MonoBehaviour
             transform.position = currentMoment.position;
             transform.rotation = currentMoment.rotation;
 
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
 
             // Setting the velocity and angular velocity of the object
             rb.velocity = currentMoment.velocity;
